@@ -21,6 +21,7 @@ freqs_dict = {
              'a15_freq' : '1.4GHz',
              'checkpoint_path_bko' : 'm5out-bko-latmem-cpt-l200-b1400/cpt.5364631158852/',
              'checkpoint_path_bk2' : 'm5out-bk2-latmem-cpt-l200-b1400/cpt.5307905196888/',
+             'checkpoint_path_t01' : 'm5out-t01-cpt-l200-b1400/cpt.5265894988410/'
         },
         '400-1400' : {
             'a7_freq' : "0.4GHz",
@@ -32,7 +33,8 @@ freqs_dict = {
             'a15_freq' : "0.6GHz",
             'checkpoint_path_bko' : 'm5out-bko-l600-b600/cpt.4553141051121',
             'checkpoint_path_m01' : 'm5out-checkpoint-latmem-hack-m01-600-600/cpt.4793771320885',
-            'checkpoint_path_bk2' : 'm5out-bk2-latmem-cpt-l600-b600/cpt.4267197177115/'
+            'checkpoint_path_bk2' : 'm5out-bk2-latmem-cpt-l600-b600/cpt.4267197177115/',
+            'checkpoint_path_t01' : 'm5out-t01-cpt-l600-b600/cpt.4227685111282/'
          },
         '1000-1000' : {
             'a7_freq' : "1.0GHz",
@@ -46,14 +48,16 @@ freqs_dict = {
             'checkpoint_path_2t0' :  'm5out-2t0-latmem-cpt-l1000-b1000/cpt.3845778248000/',
             'checkpoint_path_2t1' :  'm5out-2t1-latmem-cpt-l1000-b1000/cpt.3913028754000/',
             'checkpoint_path_bk2' :  'm5out-bk2-latmem-cpt-l1000-b1000/cpt.3645225168000/',
-            'checkpoint_path_bk3' :  'm5out-bk3-latmem-cpt-l1000-b1000/cpt.3660202577000/'
+            'checkpoint_path_bk3' :  'm5out-bk3-latmem-cpt-l1000-b1000/cpt.3660202577000/',
+            'checkpoint_path_t01' :  'm5out-t01-cpt-l1000-b1000/cpt.3706859598000/'
         },
         '1400-1800' : {
             'a7_freq' : "1.4GHz",
             'a15_freq' : "1.8GHz",
             'checkpoint_path_bko' :  'm5out-bko-l1400-b1800/cpt.3566806185128',
             'checkpoint_path_m01' : 'm5out-checkpoint-latmem-hack-m01-1400-1800/cpt.3655027154814',
-            'checkpoint_path_bk2' : 'm5out-bk2-latmem-cpt-l1400-b1800/cpt.3383146836888/'
+            'checkpoint_path_bk2' : 'm5out-bk2-latmem-cpt-l1400-b1800/cpt.3383146836888/',
+            'checkpoint_path_t01' :  'm5out-t01-cpt-l1400-b1800/cpt.3373272000432/'
         }
 }
 
@@ -63,10 +67,13 @@ def create_iridis_run_script(checkpoint_dir, little_clock, big_clock, bootscript
     if int(wall_hours) >= 60:
         raise ValueError("Wall time ("+str(int(wall_hours))+" must be less than 60")
     script_text = "#!/bin/bash\n"
-    script_text += "#PBS -l walltime={0:0>2}".format(int(wall_hours))+":00:00\n"
-    script_text += "#PBS -m ae -M mw9g09@ecs.soton.ac.uk\n"
-    script_text += "module load python\n"
-    script_text += "module load gcc/4.9.1\n"
+    if os.path.isfile('mjw-only.txt'): # custom - for a specific setup
+        script_text += "#PBS -l walltime={0:0>2}".format(int(wall_hours))+":00:00\n"
+        with open('mjw-only.txt', 'r') as f:
+            script_text += f.read()
+        f.closed
+        script_text += "module load python\n"
+        script_text += "module load gcc/4.9.1\n"
     script_text += "cd "+gem5_dir+"\n"
     script_text += "build/ARM/gem5.opt --outdir="+m5out_dir+"  configs/example/arm/fs_bigLITTLE.py --restore-from="+checkpoint_dir+" --caches --little-cpus 4 --big-cpus 4 --big-cpu-clock "+big_clock+" --little-cpu-clock "+little_clock+" --bootscript "+bootscript_path+" --cpu-type exynos\n"
     script_text += 'echo "Finished iridis run script"\n'
@@ -124,11 +131,6 @@ if __name__=='__main__':
         print("Nice and clean")
         sys.exit()
         
-    # automatically does for big and little
-    # use consistent nameing
-    # gem5/gem5-auto/
-    # g5-out-XXX-bko-1000-1400-4_5_6_7-mibenchA
-
     args.preset_list = args.preset_list.split(',')
 
     if not args.model in models_list:

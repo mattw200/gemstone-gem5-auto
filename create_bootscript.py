@@ -5,11 +5,7 @@
 
 # Uses the workloads list and creates a bootscript
 
-# TODO:
-# add m5 exit
-# add special lables
-# use odroid results to calculate time of rcS file.
-# allow to split into different chunks depending on time
+path_to_workloads = '/home/gem5/'
 
 presets = {}
 
@@ -217,7 +213,7 @@ def create_rcs(workloads_df, names_to_include, cpu_mask, preset, output_file,inc
             raise ValueError("Couldn't find "+name+"in workloads df")
         output_text += 'echo "-----POWMON WORKLOAD START : ' \
                 +workloads_df['Name'].iloc[i]+'-warmup : '+cpu_mask+'"\n'
-        output_text += 'cd '+workloads_df['Directory'].iloc[i].replace('/home/odroid/','/home/gem5/')+'\n'
+        output_text += 'cd '+workloads_df['Directory'].iloc[i].replace('/home/odroid/',path_to_workloads)+'\n'
         output_text += '/sbin/m5 resetstats\n'
         output_text += 'taskset -c '+cpu_mask+' '+workloads_df['Command'].iloc[i]+'\n'
         output_text += '/sbin/m5 dumpstats\n'

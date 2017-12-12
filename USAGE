@@ -9,5 +9,5 @@ python gem5-auto.py -g /home/mw9g09/gem5-repo/gem5/ --preset-list "mibenchA,mibe
 
 python gem5-auto.py -g /home/mw9g09/gem5-repo/gem5/ --hours 59 --preset-list "parmibenchAB,parmibenchBB,parsec4BB,royA,royB,parmibenchC" --model bko --freq '1000-1000' -h
 
-
 python gem5-auto.py -g /home/mw9g09/gem5-repo-model-01/gem5/ --hours 59 --preset-list 'parsec1B,parsec1A,parsec4A,parsec4B,parmibenchBB,misc,parsec4BB,parmibenchAB,mibenchA,mibenchB,parmibenchB,parmibenchA' --model m01 --freq '1000-1000'
+
