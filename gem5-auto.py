@@ -11,57 +11,58 @@ import create_bootscript
 
 # freq is a preset as it needs to be supported by checkpoints
 freqs_dict = {
-        '200-800' : {
-            'a7_freq' : "0.2GHz",
-            'a15_freq' : "0.8GHz",
-            'checkpoint_path_bko' : 'm5out-bko-latmem-cpt-l200-b800/cpt.5820172170000/'
-        },
+        #'200-800' : {
+            #'a7_freq' : "0.2GHz",
+            #'a15_freq' : "0.8GHz",
+            #'checkpoint_path_bko' : 'm5out-bko-latmem-cpt-l200-b800/cpt.5820172170000/'
+        #},
         '200-1400' : {
              'a7_freq' : "0.2GHz",
              'a15_freq' : '1.4GHz',
-             'checkpoint_path_bko' : 'm5out-bko-latmem-cpt-l200-b1400/cpt.5364631158852/',
-             'checkpoint_path_bk2' : 'm5out-bk2-latmem-cpt-l200-b1400/cpt.5307905196888/',
+             #'checkpoint_path_bko' : 'm5out-bko-latmem-cpt-l200-b1400/cpt.5364631158852/',
+             #'checkpoint_path_bk2' : 'm5out-bk2-latmem-cpt-l200-b1400/cpt.5307905196888/',
              'checkpoint_path_t01' : 'm5out-t01-cpt-l200-b1400/cpt.5265894988410/'
         },
-        '400-1400' : {
-            'a7_freq' : "0.4GHz",
-            'a15_freq' : "1.4GHz",
-            'checkpoint_path_bko' : 'm5out-bko-latmem-cpt-l400-b1400/cpt.4613099606766/'
-        },
+        #'400-1400' : {
+            #'a7_freq' : "0.4GHz",
+            #'a15_freq' : "1.4GHz",
+            #'checkpoint_path_bko' : 'm5out-bko-latmem-cpt-l400-b1400/cpt.4613099606766/'
+        #},
         '600-600' : {
             'a7_freq' : "0.6GHz",
             'a15_freq' : "0.6GHz",
-            'checkpoint_path_bko' : 'm5out-bko-l600-b600/cpt.4553141051121',
-            'checkpoint_path_m01' : 'm5out-checkpoint-latmem-hack-m01-600-600/cpt.4793771320885',
-            'checkpoint_path_bk2' : 'm5out-bk2-latmem-cpt-l600-b600/cpt.4267197177115/',
+            #'checkpoint_path_bko' : 'm5out-bko-l600-b600/cpt.4553141051121',
+            #'checkpoint_path_m01' : 'm5out-checkpoint-latmem-hack-m01-600-600/cpt.4793771320885',
+            #'checkpoint_path_bk2' : 'm5out-bk2-latmem-cpt-l600-b600/cpt.4267197177115/',
             'checkpoint_path_t01' : 'm5out-t01-cpt-l600-b600/cpt.4227685111282/'
          },
         '1000-1000' : {
             'a7_freq' : "1.0GHz",
             'a15_freq' : "1.0GHz",
-            'checkpoint_path_bko' :  'm5out-bko-l1000-b1000/cpt.3861983892000',
-            'checkpoint_path_m01' : 'm5out-checkpoint-latmem-hack-m01-1000-1000/cpt.3939287714000',
-            'checkpoint_path_1tb' :  'm5out-1tb-latmem-cpt-l1000-b1000/cpt.3853967257000/',
-            'checkpoint_path_2tb' :  'm5out-2tb-latmem-cpt-l1000-b1000/cpt.3938100914000/',
-            'checkpoint_path_1bp' :  'm5out-1bp-latmem-cpt-l1000-b1000/cpt.3903256446000/',
-            'checkpoint_path_bo0' :  'm5out-bo0-latmem-cpt-l1000-b1000/cpt.3856764500000/',
-            'checkpoint_path_2t0' :  'm5out-2t0-latmem-cpt-l1000-b1000/cpt.3845778248000/',
-            'checkpoint_path_2t1' :  'm5out-2t1-latmem-cpt-l1000-b1000/cpt.3913028754000/',
-            'checkpoint_path_bk2' :  'm5out-bk2-latmem-cpt-l1000-b1000/cpt.3645225168000/',
-            'checkpoint_path_bk3' :  'm5out-bk3-latmem-cpt-l1000-b1000/cpt.3660202577000/',
+            #'checkpoint_path_bko' :  'm5out-bko-l1000-b1000/cpt.3861983892000',
+            #'checkpoint_path_m01' : 'm5out-checkpoint-latmem-hack-m01-1000-1000/cpt.3939287714000',
+            #'checkpoint_path_1tb' :  'm5out-1tb-latmem-cpt-l1000-b1000/cpt.3853967257000/',
+            #'checkpoint_path_2tb' :  'm5out-2tb-latmem-cpt-l1000-b1000/cpt.3938100914000/',
+            #'checkpoint_path_1bp' :  'm5out-1bp-latmem-cpt-l1000-b1000/cpt.3903256446000/',
+            #'checkpoint_path_bo0' :  'm5out-bo0-latmem-cpt-l1000-b1000/cpt.3856764500000/',
+            #'checkpoint_path_2t0' :  'm5out-2t0-latmem-cpt-l1000-b1000/cpt.3845778248000/',
+            #'checkpoint_path_2t1' :  'm5out-2t1-latmem-cpt-l1000-b1000/cpt.3913028754000/',
+            #'checkpoint_path_bk2' :  'm5out-bk2-latmem-cpt-l1000-b1000/cpt.3645225168000/',
+            #'checkpoint_path_bk3' :  'm5out-bk3-latmem-cpt-l1000-b1000/cpt.3660202577000/',
             'checkpoint_path_t01' :  'm5out-t01-cpt-l1000-b1000/cpt.3706859598000/'
         },
         '1400-1800' : {
             'a7_freq' : "1.4GHz",
             'a15_freq' : "1.8GHz",
-            'checkpoint_path_bko' :  'm5out-bko-l1400-b1800/cpt.3566806185128',
-            'checkpoint_path_m01' : 'm5out-checkpoint-latmem-hack-m01-1400-1800/cpt.3655027154814',
-            'checkpoint_path_bk2' : 'm5out-bk2-latmem-cpt-l1400-b1800/cpt.3383146836888/',
+            #'checkpoint_path_bko' :  'm5out-bko-l1400-b1800/cpt.3566806185128',
+            #'checkpoint_path_m01' : 'm5out-checkpoint-latmem-hack-m01-1400-1800/cpt.3655027154814',
+            #'checkpoint_path_bk2' : 'm5out-bk2-latmem-cpt-l1400-b1800/cpt.3383146836888/',
             'checkpoint_path_t01' :  'm5out-t01-cpt-l1400-b1800/cpt.3373272000432/'
         }
 }
 
-models_list = ['bko','m01','1tb', '2tb', '1bp', 'bo0', '2t0','2t1','bk2','bk3']
+#models_list = ['bko','m01','1tb', '2tb', '1bp', 'bo0', '2t0','2t1','bk2','bk3','t01']
+models_list = ['t01']
 
 def create_iridis_run_script(checkpoint_dir, little_clock, big_clock, bootscript_path, m5out_dir, wall_hours, run_script_filepath,gem5_dir):
     if int(wall_hours) >= 60:
@@ -143,10 +144,15 @@ if __name__=='__main__':
     python create_bootscript.py --list ../workloads-small.config.armv7 --mask 4,5,6,7 --xu3-results ../../powmon-experiment-060-high-f/pmc-events-log.out-analysed.csv  --preset "parmibench"
     '''
     this_file_dir = dir_path = os.path.dirname(os.path.realpath(__file__))
-    workload_list_filepath = os.path.join(this_file_dir, '../workloads-small.config.armv7')
-    xu3_results_filepath = os.path.join(this_file_dir, 'xu3-results.example.csv')
+    workload_list_filepath = os.path.join(this_file_dir, 'workloads-small.config.armv7')
+    #xu3_results_filepath = os.path.join(this_file_dir, 'xu3-results.example.csv')
+    xu3_results_filepath = None
 
     experiment_label = '000'
+    if not os.path.isfile(os.path.join(this_file_dir, 'gem5-auto-counter')):
+        with open(os.path.join(this_file_dir, 'gem5-auto-counter'), 'w') as f:
+            f.write('000')
+        f.closed
     with open(os.path.join(this_file_dir, 'gem5-auto-counter'), 'r') as f:
         experiment_label = "{0:0>3}".format(int(f.read()))
     f.closed

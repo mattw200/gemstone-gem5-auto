@@ -108,7 +108,7 @@ presets['misc'] = [
 ]
 
 presets['parsec4A'] = [
-    'parsec-blackholes-4',
+    'parsec-blackscholes-4',
     'parsec-bodytrack-4',
     'parsec-canneal-4',
     'parsec-fluidanimate-4',
@@ -127,7 +127,7 @@ presets['parsec4BB'] = [
 ]
 
 presets['parsec1A'] = [
-    'parsec-blackholes-1',
+    'parsec-blackscholes-1',
     'parsec-bodytrack-1',
     'parsec-canneal-1',
     'parsec-fluidanimate-1',
@@ -284,16 +284,18 @@ if __name__=='__main__':
 
     print (workloads_df)
 
-    print("Listing all workloads: ")
-    accum = 0
-    for i in range(0, len(workloads_df.index)):
-        time = get_workload_time(args.xu3_results, workloads_df['Name'].iloc[i])
-        accum += time
-        text = workloads_df['Name'].iloc[i]
-        if (time > 0):
-            text += '\t\t\t\ttime: '+str(time)+'\t\t\t\taccum: '+str(accum)
-        print(text)
-    print("Finished listing")
+    if args.xu3_results:
+        print("Listing all workloads: ")
+        accum = 0
+        for i in range(0, len(workloads_df.index)):
+            #time = get_workload_time(args.xu3_results, workloads_df['Name'].iloc[i])
+            accum += time
+            text = workloads_df['Name'].iloc[i]
+            if (time > 0):
+                text += '\t\t\t\ttime: '+str(time)+'\t\t\t\taccum: '+str(accum)
+            print(text)
+        print("Finished listing")
+
     names_to_include = []
 
     if not args.preset:
@@ -307,12 +309,13 @@ if __name__=='__main__':
         print("Using preset: "+args.preset)
         names_to_include = presets[args.preset]
     print ("Including: "+str(names_to_include))
-    accum = 0
-    for name in names_to_include:
-        time = get_workload_time(args.xu3_results, name)
-        accum += time
-        print (name+"\t\t\t\ttime:"+str(time)+"\t\t\t\taccum:"+str(accum))
 
+    if args.xu3_results:
+        accum = 0
+        for name in names_to_include:
+            time = get_workload_time(args.xu3_results, name)
+            accum += time
+            print (name+"\t\t\t\ttime:"+str(time)+"\t\t\t\taccum:"+str(accum))
 
     #create_rcs(workloads_df, names_to_include, args)
     create_rcs(workloads_df, names_to_include, args.cpu_mask, args.preset, args.output_file)
