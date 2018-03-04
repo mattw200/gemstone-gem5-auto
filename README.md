@@ -1,17 +1,15 @@
 # GemStone-Gem5-Auto
---------------------
+
 This repo contains scripts to automate the process of running experiments in gem5. 
 
 
 ## Overview
-----------
 
 More details, instructions and tutorials available at [GemStone](http://gemstone.ecs.soton.ac.uk)
 
 
-
 ## Authors
-----------
+
 [Matthew J. Walker](mailto:mw9g09@ecs.soton.ac.uk) - [University of Southampton](https://www.southampton.ac.uk)
 
 This project supports the paper:
@@ -25,7 +23,7 @@ This work is supported by [Arm Research](https://developer.arm.com/research),
 
 
 ## License
-----------
+
 This project is licensed under the 3-clause BSD license. See LICENSE.md for details.
 
 
